@@ -1,0 +1,125 @@
+---
+Title: "¿Cuál es la distancia promedio entre dos personas en Facebook?"
+author: Duvier Suarez Fontanella
+Date: 2025-12-06
+Category: Ciencia de Datos
+Tags: redes sociales, teoría de grafos, small world, seis grados de separación
+Slug: distancia-facebook
+Template: article
+image: images/face_dist.png
+---
+
+[TOC]
+
+
+La hipótesis de que todos estamos conectados por unas pocas relaciones intermedias dejó de ser una anécdota sociológica para convertirse en un resultado matemático cuantificable. Este artículo analiza **la distancia promedio entre dos usuarios de Facebook**, revisa el concepto de **seis grados de separación** y explica, desde la teoría de grafos y los modelos de **mundos pequeños**, por qué estas cifras son tan sorprendentemente bajas en redes de escala global.
+
+---
+
+## 1. La medida real: ¿a cuántos saltos estamos en Facebook?
+
+Meta ha publicado en diversas ocasiones análisis sobre la longitud promedio de los caminos en su grafo social. Los resultados convergen sistemáticamente en un rango entre **4 y 4.7 saltos**.
+
+En su estudio más citado (Facebook Research, 2016), utilizando miles de millones de nodos y decenas de miles de millones de aristas, se obtuvo:
+
+- **Distancia promedio global:** 4.57  
+- **Distancia promedio entre usuarios activos en EE. UU.:** alrededor de 4.2  
+- **Máxima componente conexa:** > 99 % de la red
+
+Es decir, **cualquier persona en Facebook puede llegar a otra mediante poco más de cuatro intermediarios**. Dicho de otro modo: los “seis grados” ya no son seis.
+
+---
+
+## 2. ¿Por qué tan pocos? Fundamentos matemáticos
+
+### 2.1 El grafo social como red compleja
+
+Podemos representar Facebook como un grafo no dirigido $G = (V, E)$, donde:
+- $V$ es el conjunto de usuarios  
+- $E$ es el conjunto de relaciones de amistad  
+
+La **distancia** entre dos vértices $u$ y $v$, denotada $d(u,v)$, es la longitud mínima del camino que los conecta.
+
+El objetivo es calcular el **average path length** (APL):
+
+$$
+L = \frac{1}{|V|(|V|-1)} \sum_{u \neq v} d(u,v)
+$$
+
+En redes a gran escala esta suma explícita es inviable. Facebook utiliza técnicas como **BFS aproximado**, **muestreo aleatorio de vértices** y algoritmos distribuidos tipo **HyperANF** para estimar la distribución de distancias.
+
+### 2.2 La magia de los mundos pequeños
+
+El comportamiento observado en Facebook coincide con el modelo de **redes de mundo pequeño** (Watts & Strogatz, 1998), caracterizado por:
+
+1. **Alta agrupación (clustering coefficient $C$)**  
+2. **Caminos cortos con crecimiento logarítmico: $L \sim \log N$**
+
+Si $N \approx 10^9$, entonces:
+
+$$
+\log(N) \approx 21
+$$
+
+Esto sugiere que incluso una red inmensa puede tener caminos sorprendentemente cortos si se cumplen dos condiciones:
+
+- Existe fuerte conectividad local (comunidades).  
+- Hay enlaces aleatorios que actúan como “atalayos” en el grafo.
+
+Facebook cumple ambos requisitos: abundan las comunidades de amigos, pero también los contactos distantes geográfica o socialmente. Esos enlaces reducen drásticamente $L$.
+
+---
+
+## 3. Los seis grados de separación: historia, mito y validación
+
+La idea nació en 1929 con Frigyes Karinthy, se popularizó en 1967 con el experimento de Stanley Milgram y terminó convertida en un concepto cultural. Pero matemáticamente, el fenómeno posee base sólida.
+
+### 3.1 Milgram y sus cadenas de cartas
+
+Milgram encontró longitudes promedio cercanas a **5.5 pasos** para conectar a un ciudadano cualquiera con un objetivo elegido. Aunque el diseño experimental tenía sesgos, reveló la estructura de mundo pequeño en redes humanas.
+
+### 3.2 Redes modernas y validación computacional
+
+Con datos completos de grafos sociales actuales, hoy se puede afirmar:
+
+- La distancia promedio **no solo es menor que seis**, sino que **se estabiliza por debajo de cinco** en redes con miles de millones de nodos.  
+- Este fenómeno no implica que todos se conozcan; solo que **la estructura combinatoria del grafo permite trayectorias muy cortas**.
+
+En teoría de grafos, esta propiedad se explica por:
+
+- **Distribuciones de grado con colas pesadas (scale-free)**.  
+- **Hubs con grado extremadamente alto**.  
+- **Coeficiente de agrupación elevado**, mayor que el de redes aleatorias tipo Erdős–Rényi.
+
+---
+
+## 4. ¿Por qué importa todo esto?
+
+### 4.1 Implicaciones científicas
+
+- Entender distancias promedio permite modelar **difusión de información**, **propagación de epidemias**, **viralidad** y **resiliencia estructural**.  
+- Un APL bajo implica expansiones rápidas y pocas etapas de transmisión.
+
+### 4.2 Implicaciones sociales y éticas
+
+- Las redes acortan el mundo, pero también **amplifican externalidades**: rumores, polarización, contagios culturales.  
+- La estructura de mundo pequeño regula la conectividad, pero no la calidad de los vínculos.
+
+### 4.3 Implicaciones para ingeniería de plataformas
+
+- Mejora de algoritmos de recomendación (friends-of-friends).  
+- Optimización de buscadores sociales y privacidad basada en distancias.  
+- Diseño de sistemas distribuidos que explotan el comportamiento logarítmico de $L$.
+
+---
+
+## 5. Conclusión
+
+Las distancias sociales que intuíamos desde hace un siglo son hoy métricas verificables en redes de escala planetaria. Facebook muestra que:
+
+- La distancia promedio entre dos personas es **menor de cinco pasos**.  
+- La teoría de **mundos pequeños** predice y explica este fenómeno.  
+- Los **seis grados de separación** no solo se mantienen: se comprimen.
+
+La combinación de teoría matemática, datos masivos y modelización computacional revela que vivimos en un mundo sorprendentemente bien conectado.
+

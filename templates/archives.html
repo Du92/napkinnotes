@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Posts · {{ super() }}
+{% endblock title %}
+
+{% block head_description %}
+Full archives of {{ SITENAME|striptags|e }} blog.
+{% endblock head_description %}
+
+{% block meta_tags_in_head %}
+{{ super() }}
+{% from '_includes/_defaults.html' import FEATURED_IMAGE, ARCHIVES_URL with context %}
+<meta property="og:title" content="All Posts · {{ SITENAME|striptags|e }}"/>
+<meta name="twitter:title" content="All Posts · {{ SITENAME|striptags|e }}">
+<meta property="og:url" content="{{ SITEURL }}/{{ ARCHIVES_URL }}" />
+<meta property="og:description" content="Full archives of {{ SITENAME|striptags|e }} blog" />
+<meta name="twitter:description" content="Full archives of {{ SITENAME|striptags|e }} blog">
+<meta property="og:site_name" content="{{ SITENAME|striptags|e }}" />
+<meta property="og:article:author" content="{{ AUTHOR }}" />
+{% if FEATURED_IMAGE %}
+<meta property="og:image" content="{{ FEATURED_IMAGE }}" />
+<meta name="twitter:image" content="{{ FEATURED_IMAGE }}" >
+{% endif %}
+
+<style>
+/* Grid styles */
+:root{
+  --grid-gap: 1rem;
+  --card-radius: 10px;
+  --card-shadow: 0 8px 28px rgba(16,16,16,0.06);
+  --card-aspect: 56.25%;
+  --text-muted: #6b6b6b;
+  --max-width: 1200px;
+  --accent: #8b0000;
+}
+
+.container-archives {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+}
+
+.article-card {
+  background: #fff;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.article-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(16,16,16,0.12);
+}
+
+.card-media {
+  position: relative;
+  width: 100%;
+  padding-top: var(--card-aspect);
+  background-color: #efefef;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.card-title { margin: 0; font-size: 1.05rem; font-weight:700; line-height:1.15; }
+.card-meta { font-size:.88rem; color:var(--text-muted); }
+.card-excerpt { color:#333; font-size:.95rem; margin-top:.5rem; flex:1 1 auto; }
+
+@media (max-width:980px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:640px) { .articles-grid { grid-template-columns: 1fr; } }
+</style>
+{% endblock meta_tags_in_head %}
+
+{% block content %}
+<div class="container-archives">
+
+  <h1>All Posts</h1>
+
+  {% if dates %}
+  <div class="articles-grid">
+    {% for article in dates %}
+      {# ------------------- Detección segura de imagen ------------------- #}
+      {% set image_url = '' %}
+
+      {# 1) featured_image (común en algunos themes) #}
+      {% if article.featured_image is defined and article.featured_image %}
+        {% set image_url = article.featured_image %}
+
+      {# 2) article.image (propiedad directa) #}
+      {% elif article.image is defined and article.image %}
+        {% if article.image.startswith('http') %}
+          {% set image_url = article.image %}
+        {% else %}
+          {% set image_url = SITEURL ~ '/' ~ article.image %}
+        {% endif %}
+
+      {# 3) article.metadata.image (metadata puede ser dict u objeto; comprobamos existence) #}
+      {% elif article.metadata is defined and article.metadata %}
+        {# metadata puede ser dict o objeto con atributo 'image' #}
+        {% if article.metadata.image is defined and article.metadata.image %}
+          {% if article.metadata.image.startswith('http') %}
+            {% set image_url = article.metadata.image %}
+          {% else %}
+            {% set image_url = SITEURL ~ '/' ~ article.metadata.image %}
+          {% endif %}
+        {% elif article.metadata.get and article.metadata.get('image') %}
+          {# Si metadata es dict con get() (seguro si metadata es dict) #}
+          {% set meta_img = article.metadata.get('image') %}
+          {% if meta_img %}
+            {% if meta_img.startswith('http') %}
+              {% set image_url = meta_img %}
+            {% else %}
+              {% set image_url = SITEURL ~ '/' ~ meta_img %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      {# ------------------------------------------------------------------ #}
+
+      <article class="article-card">
+        {% if image_url %}
+          <div class="card-media" style="background-image: url('{{ image_url }}');"></div>
+        {% else %}
+          <div class="card-media"></div>
+        {% endif %}
+
+        <div class="card-body">
+          <h3 class="card-title">
+            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+          </h3>
+
+          <div class="card-meta">
+            {% if article.category %}{{ article.category }} • {% endif %}
+            <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+          </div>
+
+          {% if article.summary %}
+            <div class="card-excerpt">{{ article.summary }}</div>
+          {% else %}
+            <div class="card-excerpt">{{ article.content |striptags | truncate(160, True, '...') }}</div>
+          {% endif %}
+        </div>
+      </article>
+
+    {% endfor %}
+  </div>
+  {% else %}
+    <p>No hay entradas para mostrar.</p>
+  {% endif %}
+</div>
+{% endblock content %}

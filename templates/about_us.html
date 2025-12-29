@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{# -----------------------------------------------------------
+   CARGA CSS (ajusta la ruta según dónde lo tengas)
+   Si usas STATIC_PATHS → output/static/custom-about.css
+------------------------------------------------------------ #}
+{% block extra_head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ SITEURL }}/static/custom-about.css">
+{% endblock %}
+
+
+{% block content %}
+<main class="about-us page page--about-us">
+
+    <header class="about-us__header">
+        <h1 class="about-us__title">{{ page.title }}</h1>
+    </header>
+
+    {# =========================================================
+       RESOLVER LISTA DE AUTORES
+       Pelican NORMALIZA metadata a minúsculas → "authors"
+       pero tú defines "Authors", así que revisamos ambos.
+       ========================================================= #}
+
+    {% set authors = page.metadata.get('Authors') 
+                     or page.metadata.get('authors')
+                     or [] %}
+
+    {# Si llega como string (caso sin plugin YAML), no sirve. #}
+    {% if authors is string %}
+        <!-- Authors llegó como texto, Pelican no parseó YAML -->
+        {% set authors = [] %}
+    {% endif %}
+
+    <section class="about-us__authors">
+        <div class="authors-grid">
+
+            {% for a in authors %}
+                <article class="author-card">
+
+                    <figure class="author-card__figure">
+                        <img class="author-card__image"
+                             src="{{ SITEURL }}/{{ a.image }}"
+                             alt="{{ a.name }}">
+                    </figure>
+
+                    <div class="author-card__body">
+                        <h3 class="author-card__name">{{ a.name }}</h3>
+                        <div class="author-card__description">
+                            {{ a.description }}
+                        </div>
+                    </div>
+
+                </article>
+            {% else %}
+                <p class="about-us__no-authors">
+                    No hay autores definidos en la metadata.
+                </p>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    {# CONTENIDO OPCIONAL DEL ARCHIVO MD #}
+    {% if page.content %}
+        <section class="about-us__extra">
+            {{ page.content }}
+        </section>
+    {% endif %}
+
+</main>
+{% endblock %}
