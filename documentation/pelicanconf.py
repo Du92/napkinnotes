@@ -7,6 +7,7 @@ AUTHOR = ""
 SITENAME = "Napkin Notes"
 SITESUBTITLE = ""
 SITEURL = ""
+RELATIVE_URLS = True
 
 PATH = "content"
 
