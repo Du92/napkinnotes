@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Napkin Notes</title><link href="/" rel="alternate"/><link href="feeds/all-en.atom.xml" rel="self"/><id>/</id><updated>2025-12-06T00:00:00+05:00</updated><entry><title>¿Cuál es la distancia promedio entre dos personas en Facebook?</title><link href="distancia-facebook" rel="alternate"/><published>2025-12-06T00:00:00+05:00</published><updated>2025-12-06T00:00:00+05:00</updated><author><name>Duvier Suarez Fontanella</name></author><id>tag:None,2025-12-06:distancia-facebook</id><summary type="html">
 &lt;p&gt;La hipótesis de que todos estamos conectados por unas pocas relaciones intermedias dejó de ser una anécdota sociológica para convertirse en un resultado matemático cuantificable. Este artículo analiza &lt;strong&gt;la distancia promedio entre dos usuarios de Facebook&lt;/strong&gt;, revisa el concepto de &lt;strong&gt;seis grados de separación&lt;/strong&gt; y explica, desde la teoría de …&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;La hipótesis de que todos estamos conectados por unas pocas relaciones intermedias dejó de ser una anécdota sociológica para convertirse en un resultado matemático cuantificable. Este artículo analiza &lt;strong&gt;la distancia promedio entre dos usuarios de Facebook&lt;/strong&gt;, revisa el concepto de &lt;strong&gt;seis grados de separación&lt;/strong&gt; y explica, desde la teoría de grafos y los modelos de &lt;strong&gt;mundos pequeños&lt;/strong&gt;, por qué estas cifras son tan sorprendentemente bajas en redes de escala global.&lt;/p&gt;
-&lt;hr/&gt;
+&lt;h2 id="_1"&gt;&lt;img alt="" src="images/face_dist.png"/&gt;&lt;a class="headerlink" href="#_1" title="Permanent link"&gt; &lt;/a&gt;&lt;/h2&gt;
 &lt;h2 id="1-la-medida-real-a-cuantos-saltos-estamos-en-facebook"&gt;1. La medida real: ¿a cuántos saltos estamos en Facebook?&lt;a class="headerlink" href="#1-la-medida-real-a-cuantos-saltos-estamos-en-facebook" title="Permanent link"&gt; &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Meta ha publicado en diversas ocasiones análisis sobre la longitud promedio de los caminos en su grafo social. Los resultados convergen sistemáticamente en un rango entre &lt;strong&gt;4 y 4.7 saltos&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;En su estudio más citado (Facebook Research, 2016), utilizando miles de millones de nodos y decenas de miles de millones de aristas, se obtuvo:&lt;/p&gt;
@@ -152,7 +152,7 @@ Parece una tontería, pero detrás hay física.&lt;br/&gt;
 Si corres, pasas menos tiempo bajo la lluvia, aunque podrías chocar con más gotas de frente.&lt;br/&gt;
 Si caminas, te cruzas con menos gotas por segundo, pero estás más tiempo expuesto.  &lt;/p&gt;
 &lt;p&gt;Veamos qué dice la física cuando ponemos números y ecuaciones encima de la mesa.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="../images/bajo_lluvia.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="images/bajo_lluvia.png"/&gt;&lt;/p&gt;
 &lt;h2 id="planteamiento-del-problema"&gt;Planteamiento del problema&lt;a class="headerlink" href="#planteamiento-del-problema" title="Permanent link"&gt; &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Supongamos una persona de altura &lt;span class="math"&gt;\(h\)&lt;/span&gt; y anchura &lt;span class="math"&gt;\(w\)&lt;/span&gt; que recorre una distancia total &lt;span class="math"&gt;\(D\)&lt;/span&gt; bajo una lluvia que cae verticalmente con velocidad &lt;span class="math"&gt;\(v_g\)&lt;/span&gt;.&lt;br/&gt;
 La persona se mueve horizontalmente con velocidad &lt;span class="math"&gt;\(v\)&lt;/span&gt;.&lt;/p&gt;
@@ -355,7 +355,7 @@ $$&lt;/div&gt;
 En un solo &lt;em&gt;pop&lt;/em&gt; se combinan &lt;strong&gt;termodinámica&lt;/strong&gt;, &lt;strong&gt;gases comprimidos&lt;/strong&gt;, &lt;strong&gt;ondas de choque&lt;/strong&gt;, y un proyectil diminuto con aspiraciones balísticas.&lt;br/&gt;
 En este artículo exploraremos cuánta fuerza impulsa al corcho, cómo evoluciona la presión interna y por qué, bajo ciertas condiciones, el gas que escapa puede alcanzar velocidades &lt;strong&gt;cercanas al sonido&lt;/strong&gt;.&lt;/p&gt;
 &lt;hr/&gt;
-&lt;p&gt;&lt;img alt="Ejemplo de imagen" src="../images/champan_corcho.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ejemplo de imagen" src="images/champan_corcho.png"/&gt;&lt;/p&gt;
 &lt;h2 id="1-una-botella-aparentemente-tranquila-pero-llena-de-presion"&gt;1. Una botella aparentemente tranquila (pero llena de presión)&lt;a class="headerlink" href="#1-una-botella-aparentemente-tranquila-pero-llena-de-presion" title="Permanent link"&gt; &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Cuando ves una botella de champán en la mesa, mayestática, elegante, ajena al caos, parece un objeto pacífico.&lt;br/&gt;
 No lo es.&lt;/p&gt;
@@ -589,7 +589,7 @@ W \sim 10^{-3}~\text{J}
 $$&lt;/div&gt;
 &lt;p&gt;A pesar de parecer pequeño, este trabajo se distribuye en escalas microscópicas, generando velocidades de expansión del orden de varios metros por segundo, suficientes para inflar el almidón y solidificarlo instantáneamente por enfriamiento.&lt;/p&gt;
 &lt;hr/&gt;
-&lt;p&gt;&lt;img alt="Ejemplo de imagen" src="../images/palomitas_1.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ejemplo de imagen" src="images/palomitas_1.png"/&gt;&lt;/p&gt;
 &lt;h2 id="energia-total-liberada"&gt;Energía total liberada&lt;a class="headerlink" href="#energia-total-liberada" title="Permanent link"&gt; &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;El contenido energético total asociado al cambio de fase del agua en un solo grano es:&lt;/p&gt;
 &lt;div class="math"&gt;$$
